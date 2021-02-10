@@ -1,0 +1,17 @@
+#header {
+    background: url('/img/brooke-lark-wMzx2nBdeng-unsplash.jpg') center center/cover no-repeat fixed;
+    height: 80vh;
+}
+
+#homestew_alt_img {
+    height: 45px;
+    width: auto;
+}
+
+
+
+/* @media(min-width:992px) {
+    .navbar-expand-lg .navbar-collapse {
+        width: 100%;
+    }
+} */
