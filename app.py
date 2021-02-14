@@ -5,7 +5,7 @@ from sqlalchemy.exc import IntegrityError
 from secrets import SECRET, os
 
 from models import db, connect_db, User, Recipe, Ingredient, Instruction, FavoriteRecipe
-
+from forms import UserAddForm, LoginForm
 
 CURR_USER_KEY = "curr_user"
 
@@ -112,3 +112,8 @@ def logout():
     do_logout()
     flash("You have logged out, See you soon!", "success")
     return redirect('/')
+
+
+@app.route('/')
+def home():
+    return render_template('/templates/home.html')

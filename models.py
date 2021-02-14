@@ -64,7 +64,7 @@ class Recipe(db.Model):
     __tablename__ = 'recipes'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text, nullabele=False, unique=True)
+    name = db.Column(db.Text, nullable=False, unique=True)
     recipe_source_id = db.Column(db.Integer, nullable=False)
     recipe_image = db.Column(db.Text, default="/static/images/default-pic.png")
     summary = db.Column(db.Text)
@@ -90,7 +90,7 @@ class Instruction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     recipe_id = db.Column(db.Integer, db.ForeignKey(
         'recipes.id', ondelete='cascade'))
-    step_number = db.Column(db.Text, nullabe=False)
+    step_number = db.Column(db.Text, nullable=False)
     step_detail = db.Column(db.Text, nullable=False)
 
 
