@@ -1,0 +1,30 @@
+{%extends 'base.html'%}
+{%block content%}
+<section>
+    <div id="favorites_section">
+        <h1 class="section_heading text-white font-weight-bold display-1 text-center">Favorite Recipes</h1>
+    </div>
+
+    <div class="mt-5 container">
+        <div class="row">
+            {%for recipe in saved_recipes%}
+            <div class="col-lg-4 col-md-6">
+                <div class="card" style="width: 18rem;">
+                    <a href="\search\recipes\{{recipe.recipe_source_id}}"><img class="card-img-top img-fluid" src="{{recipe.recipe_image}}"></a>
+                  
+                    <div class="card-body">
+                      <h5 class="card-title">{{recipe.title}}</h5>
+                      <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.</p>
+                      <a href="#">Type</a>
+                      <a href="#">Time</a>
+                    </div>
+                  </div>
+            </div>
+            {%endfor%}
+        </div>
+</section>
+
+
+
+
+{%endblock%}

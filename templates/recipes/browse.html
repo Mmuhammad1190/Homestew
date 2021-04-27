@@ -1,0 +1,154 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<section>
+    <div id="browse_section">
+        <h1 class="section_heading text-white font-weight-bold display-1 text-center">Browse Recipes</h1>
+    </div>
+    <div class="meal_types">
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-lg-12  mx-auto">
+                    <h2 class="browse_heading"><span>Choose A Type</span></h2>
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                        <!-- Carousel indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                            <li data-target="#myCarousel" data-slide-to="3"></li>
+                        </ol>
+                        <!-- Wrapper for carousel items -->
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="img-box">
+                                            <a href="/recipes/browse/main_course">MAIN COURSE</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="img-box">
+                                            <a href="/recipes/browse/side_dish">SIDE DISH</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="img-box">
+                                            <a href="/recipes/browse/dessert">DESSERT</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="img-box">
+                                            <a href='/recipes/browse/appetizer'>APPETIZER</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="img-box">
+                                            <a href='/recipes/browse/salad'>SALAD</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="img-box">
+                                            <a href='/recipes/browse/bread'>BREAD</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="img-box">
+                                            <a href='/recipes/browse/breakfast'>BREAKFAST</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="img-box">
+                                            <a href='/recipes/browse/soup'>SOUP</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="img-box">
+                                            <a href='/recipes/browse/beverage'>BEVERAGE</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="img-box">
+                                            <a href='/recipes/browse/sauce'>SAUCE</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="img-box">
+                                            <a href='/recipes/browse/marinade'>MARINADE</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="img-box">
+                                            <a href="">FINGERFOOD</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="img-box">
+                                            <a href='/recipes/browse/snack'>SNACK</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="img-box">
+                                            <a href='/recipes/browse/drink'>DRINK</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Carousel controls -->
+                        <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                            <i class="fa fa-chevron-left"></i>
+                        </a>
+                        <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h3 class="text-center">{{recipe_type}}</h3>
+
+            <div class="row">
+                {%for recipe in recipes.recipes%}
+                {%if recipe.image%}
+                <div class="col-lg-5">
+                    <div class="recipe_box">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <a href="/search/recipes/{{recipe.id}}"><img class="img-fluid" src="{{recipe.image}}"
+                                        alt=""></a>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul>
+                                    <li>{{recipe.title}}</li>
+                                    <li><i class="far fa-clock"></i> {{recipe.readyInMinutes}} minutes</li>
+                                    <li>Recipe By: John Doe</li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {%endif%}
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock%}

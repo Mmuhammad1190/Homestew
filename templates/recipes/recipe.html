@@ -1,0 +1,68 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<section id="recipe">
+    <div class="container">
+        <div class="pt-5" id="recipe_header">
+            <h1>{{recipe.title}}</h1>
+            <div id="recipe_img">
+                <img class="img-fluid" src="{{recipe.image}}" alt="">
+                <div class="recipe_details">
+                    <a href="/recipes/save/{{recipe.id}}" id="{{recipe.id}}"
+                        class="recipe_save btn btn-primary mt-3">save</a>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col-lg-7">
+                    <p class="recipe_summary">{{recipe.summary}}</p>
+                </div>
+                <div class="col-lg-4">
+                    <div class="nutrition_card">
+                        <h3>Nutrition Facts </h3>
+                        <table style="width:100%">
+                            {%for k,v in nutrition.items() if k != "isStale" and k != "expires" and k != "bad" and k !=
+                            "good"%}
+                            <tr>
+                                <td>{{k}}</td>
+                                <td>{{v}}</td>
+                            </tr>
+                            {%endfor%}
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="mt-5" id="recipe_guide">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="ingredients">
+                        <h2>Ingredients</h2>
+                        <ul>
+                            {%for item in recipe.extendedIngredients%}
+                            <li class="mb-2"><i class="d-inline-block mr-3 fas fa-check"></i>{{item.original}}</li>
+                            {%endfor%}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instructions">
+                        <h2>Instructions</h2>
+                        <ol>
+                            {%for list in recipe.analyzedInstructions[0].steps%}
+                            <li class="mb-3">{{list.step}}</li>
+                            {%endfor%}
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+</section>
+
+{%endblock%}

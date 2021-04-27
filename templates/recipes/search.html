@@ -1,0 +1,100 @@
+{%extends 'base.html'%}
+{%block content%}
+<section class="search mb-5">
+    <div class="search_bar">
+        <form action="{{ url_for('search_page') }}" method="POST" id="search_form">
+
+            {{ form.hidden_tag() }}
+
+            <div class="inner_form">
+                <div class="basic_search">
+                    <div class="input_field">
+                        {% for field in form
+                            if field.widget.input_type != 'hidden' and field.name == 'query' %}
+                        {{field(placeholder="What are you in the mood for?")}}
+                        {%endfor%}
+                        <div class="icon_wrap">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="advanced_search">
+                    <span class="desc">Advanced Search</span>
+                    <div class="row">
+                        <div class="input_field">
+                            <div class="input_select">
+                                {% for field in form
+                                    if field.widget.input_type != 'hidden' and field.name == 'diet' %}
+                                {{field}}
+                                {%endfor%}
+                            </div>
+                        </div>
+                        <div class="input_field">
+                            <div class="input_select">
+                                {% for field in form
+                                    if field.widget.input_type != 'hidden' and field.name == 'cuisine' %}
+                                {{field}}
+                                {%endfor%}
+                            </div>
+                        </div>
+                        <div class="input_field">
+                            <div class="input_select">
+                                {% for field in form
+                                    if field.widget.input_type != 'hidden' and field.name == 'exclude_cuisine' %}
+                                {{field}}
+                                {%endfor%}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row second">
+                        <div class="input_field">
+                            <div class="input_select">
+                                {% for field in form
+                                    if field.widget.input_type != 'hidden' and field.name == 'meal_type'%}
+                                {{field}}
+                                {%endfor%}
+                            </div>
+                        </div>
+                        <div class="input_field">
+                            <div class="input_select">
+                                {% for field in form
+                                    if field.widget.input_type != 'hidden' and field.name == 'intolerance'%}
+                                {{field}}
+                                {%endfor%}
+                            </div>
+                        </div>
+                        <div class="input_field">
+                            <div class="input_select">
+                                {% for field in form
+                                    if field.widget.input_type != 'hidden' and field.name == 'sort'%}
+                                {{field}}
+                                {%endfor%}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row third">
+                        <div class="input_field">
+                            <div class="result-count">
+                                <span id="result_span">0 </span>results</div>
+                            <div class="group_btn">
+                                <button class="btn_delete" id="delete">Reset</button>
+                                <button type="submit" class="btn_search">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+</section>
+
+<section id="results">
+    <div class="ml-3 mr-3">
+        <div class="row result_row"></div>
+        <div class="pb-5 text-center">
+            <button id="load_btn" style="display:none" class="btn btn-danger">Load More</button>
+        </div>
+
+    </div>
+</section>
+
+{%endblock%}

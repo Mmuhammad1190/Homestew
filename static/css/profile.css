@@ -1,0 +1,113 @@
+/* Profile */
+#wrapper {
+  overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+  min-height: 85vh;
+  /* width: 16%; */
+  margin-left: -15rem;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+  padding: 10px;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+.edit_container {
+  padding: 35px 200px;
+}
+
+#edit_form .form-group {
+  margin: 0;
+}
+
+#edit_form label {
+  margin: 0;
+}
+
+.sections {
+  background: linear-gradient(#39393b56, #39393b56),
+    url('/static/images/brooke-lark-08bOYnH_r_E-unsplash.jpg') top center/cover no-repeat fixed;
+  height: auto;
+  
+}
+
+.user_image img {
+  border-radius: 50%;
+  width: 25%;
+}
+
+#delete_section {
+  margin-top: 70px;
+}
+
+#delete_account {
+  position: relative;
+  height: auto;
+  width: 100%;
+  background-color: white;
+}
+
+.icon {
+  position: absolute;
+  left: 50%;
+  top: -30px;
+  transform: translateX(-50%);
+  font-size: 1.9rem;
+  background-color:#C3332A;   /*PERSIAN RED */
+  border-radius: 50%;
+  padding: 8px 10px 0px;
+  margin-bottom: 10px;
+}
+
+.icon i {
+  color: white;
+}
+
+.delete_heading {
+  padding-top: 40px;
+}
+
+.delete_footer .btn{
+  padding: 10px 30px;
+  font-size: 1.2rem;
+}
+
+.btn_delete {
+  background-color: #C3332A;   /*PERSIAN RED */
+  color: white
+}
+
+.modal-body label {
+  color: black;
+}
+
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}

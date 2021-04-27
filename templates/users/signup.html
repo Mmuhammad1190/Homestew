@@ -1,0 +1,31 @@
+{%extends 'base.html'%} {% block content %}
+<section class="sign_up">
+  <div id="reg_section">
+    <div class="row" id="reg_form">
+      <div class="reg_img col-lg-4 d-none d-lg-block d-xl-block"></div>
+      <div class="col-lg-8 col-md-12">
+        <h2 class="text-center mt-4 join">Sign Up to View Recipes &amp; Save Your Favorites! </h2>
+        <form method="POST" id="user_form">
+          {{ form.hidden_tag() }}
+
+          {% for field in form if field.widget.input_type != 'hidden' %}
+
+          <div class="form-group">
+            {{field.label}}
+            {{ field(placeholder=field.label.text,class="mt-0 form-control") }}
+          </div>
+
+          {% for error in field.errors %}
+          <span class="text-danger">{{ error }}</span>
+          {% endfor %} {% endfor %}
+
+          <p class="text-center mt-3 h6">Already have an account? <a href="\login">Login</a></p>
+
+          <button class="mt-3 btn btn-warning btn-lg btn-block">Sign Up!</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

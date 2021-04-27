@@ -1,0 +1,297 @@
+/* search.html */
+
+.search {
+    background: linear-gradient(#39393b56, #39393b56), url("/static/images/jason-briscoe-GliaHAJ3_5A-unsplash.jpg") center center/cover no-repeat fixed;
+    height: 70vh;
+    max-width: 100%;
+}
+
+.search_bar {
+    display: flex;
+    min-height: 60vh;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    padding: 50px;
+}
+
+.search_bar form {
+    width: 100%;
+    max-width: 790px;
+    margin: 0;
+    padding: 0 100px;
+}
+
+.search_bar form .inner_form {
+    width: 100%;
+}
+
+.search_bar form .inner_form .input_field {
+    position: relative;
+}
+
+.search_bar form .inner_form .input_field input {
+    height: 100%;
+    border: 0;
+    background: #fff;
+    /*WHITE*/
+    display: block;
+    width: 100%;
+    padding: 10px 32px 10px 70px;
+    font-size: 18px;
+    border-radius: 3px;
+    height: 50px;
+    font-size: 1.3rem;
+}
+
+.search_bar form .inner_form .input_field input:hover,
+.search_bar form .inner_form .input_field input:focus {
+    box-shadow: none;
+    outline: 0;
+    color: none;
+}
+
+.group_btn button {
+    min-width: 100px;
+    height: 40px;
+    padding: 0 15px;
+    white-space: nowrap;
+    border-radius: 40px;
+    color: #fff;
+    /*WHITE*/
+    transition: all .2s ease-out, color .2s ease-out;
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.search_bar form .inner_form .input_field .btn_search {
+    background: #C3332A;   /*PERSIAN RED */
+}
+
+.search_bar form .inner_form .input_field .btn_search:hover {
+    background: #d7501b;
+}
+
+.search_bar form .inner_form .input_field .btn_delete {
+    background: #454547;
+}
+
+.search_bar form .inner_form .input_field .btn_delete:hover {
+    background: #39393B;
+    /*OUTER SPACE */
+}
+
+.search_bar form .inner_form .basic_search {
+    margin-bottom: 5px;
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+.search_bar form .inner_form .basic_search .input_field {
+    width: 100%;
+}
+
+.search_bar form .inner_form .basic_search .input_field input {
+    padding: 10px 80px 10px 20px;
+}
+
+.search_bar form .inner_form .basic_search .input_field .icon_wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 100%;
+}
+
+.search_bar form .inner_form .basic_search .input_field .icon_wrap i {
+    font-size: 1.4rem;
+    color: #C3332A;   /*PERSIAN RED */
+}
+
+.search_bar form .inner_form .advanced_search {
+    background: rgba(0, 0, 0, 0.692);
+    padding: 20px 25px;
+    border-radius: 3px;
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+.search_bar form .inner_form .advanced_search .desc {
+    font-size: 1.1rem;
+    color: #999;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.search_bar form .inner_form .advanced_search .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+.search_bar form .inner_form .advanced_search .row.second {
+    margin-bottom: 25px;
+}
+
+.search_bar form .inner_form .advanced_search .row.third {
+    margin-bottom: 0;
+}
+
+.search_bar form .inner_form .advanced_search .row.third .input_field {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search_bar form .inner_form .advanced_search .row.third .input_field .result-count {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 110px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 14px;
+}
+
+.search_bar form .inner_form .advanced_search .row.third .input_field .result-count span {
+    color: #C3332A;   /*PERSIAN RED */
+    padding-right: 5px;
+}
+
+.search_bar form .inner_form .advanced_search .input_field {
+    width: calc(33.3333% - 2px);
+}
+
+.search_bar form .inner_form .advanced_search .input_select {
+    height: 40px;
+}
+
+#load_btn {
+    border-radius: 40px;
+}
+
+label {
+    color: #fff;
+    /*WHITE*/
+    font-weight: 300;
+}
+
+select {
+    border: none;
+    outline: none;
+    border-radius: 0;
+    margin: 0;
+    display: block;
+    width: 100%;
+    padding: 12px 0px 10px 4px;
+    height: auto;
+}
+
+select,
+option {
+    font-size: 0.9rem;
+}
+
+
+.recipe_card {
+    position: relative;
+    padding: 20px;
+    box-shadow: -1px 2px 10px 0px rgba(57, 57, 59, 0.77);
+    margin-bottom: 35px;
+    height: 350px;
+    width: 85%;
+    color: #FCF8F5;
+    /*ATHENS GRAY*/
+}
+
+.overlay_button {
+    display: none;
+}
+
+.overlay_button a {
+    color: #EC7533;
+    /*BURNT SIENNA */
+    border: 2px solid #ec743383;
+    /*BURNT SIENNA */
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.541);
+    font-size: 1.1rem;
+    transform: translate(50%, 50%);
+    font-weight: 400;
+    bottom: 13%;
+}
+
+.overlay_button:hover a {
+    text-decoration: none;
+    background-color: #ec7433c5;
+    /*BURNT SIENNA */
+    color: white;
+    border: 2px solid #fff;
+}
+
+.recipe_card_img {
+    border-radius: 50%;
+}
+
+.recipe_card_title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-top: 7rem;
+}
+
+.collection i {
+    font-size: 1.5rem;
+    opacity: 0;
+}
+
+.recipe_card:hover .overlay_button {
+    display: block;
+}
+
+.recipe_card:hover .collection i {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.recipe_card:hover .recipe_card_title {
+    color: #FCF8F5;
+    /*ATHENS GRAY*/
+    z-index: 1;
+}
+
+
+
+@media screen and (max-width: 767px) {
+    .search_bar form .inner_form .basic_search .input_field input {
+        padding: 10px 60px 10px 40px;
+    }
+
+    .search_bar form .inner_form .basic_search .input_field .icon_wrap {
+        width: 60px;
+        justify-content: center;
+    }
+
+    .search_bar form .inner_form .advanced_search .row {
+        display: block;
+    }
+
+    .search_bar form .inner_form .advanced_search {
+        padding-bottom: 20px;
+    }
+
+    .search_bar form .inner_form .advanced_search .input_field {
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .search {
+        height: 100%;
+    }
+}

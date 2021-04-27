@@ -1,0 +1,6 @@
+#favorites_section {
+    background-image: linear-gradient(#39393bb6, #39393bb6), url("/static/images/lily-banse--YHSwy6uqvk-unsplash.jpg");
+    height: 45vh;
+	background-attachment: fixed;
+    background-position: bottom;
+}

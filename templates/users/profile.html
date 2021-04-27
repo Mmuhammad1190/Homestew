@@ -1,0 +1,221 @@
+{%extends 'base.html'%}
+{%block content%}
+<section id="profile">
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="list-group list-group-flush">
+        <a href="#" id="profile_btn" class="list-group-item list-group-item-action bg-light">Profile</a>
+        <a href="#" id="edit_btn" class="list-group-item list-group-item-action bg-light">Edit Profile</a>
+        <a href="#" id="save_btn" class="list-group-item list-group-item-action bg-light">Saved Recipes</a>
+        <a href="#" id="delete_btn" class="list-group-item list-group-item-action bg-light">Deactivate Account</a>
+      </div>
+    </div>
+    
+
+    <!-- Page Content -->
+    <div class="sections" id="page-content-wrapper">
+      <!-- Toggle menu btn  -->
+      <div class="menu_btn">
+        <button class="mt-2 ml-5 mb-3 btn btn-primary" id="menu-toggle">Toggle Menu</button>
+      </div>
+
+
+
+      <!-- Edit Profile section -->
+      <div style="display: none;" id="edit_section">
+        <div class="container">
+          <div class="edit_container">
+            <h2 class="text-center">Edit Profile</h2>
+            <form method="POST" id="edit_form">
+              {{ form.hidden_tag() }}
+
+              {% for field in form if field.widget.input_type != 'hidden' %}
+
+              <div class="form-group">
+                {{field.label}}
+                {{ field(placeholder=field.label.text,class="mt-0 form-control") }}
+              </div>
+
+              {% for error in field.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %} {% endfor %}
+
+              <button class="mt-5 btn btn-danger btn-lg btn-block">SAVE</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Show Profile Card section -->
+      <div id="profile_section">
+        <div class="profile d-flex align-items-center justify-content-center">
+          <div class="col-xl-8 order-xl-1">
+            <div class="mt-3 card bg-secondary shadow">
+              <div class="card-header bg-white border-0">
+                <div class="row align-items-center">
+                  <div class="col-8">
+                    <h3 class="mb-0">My account</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <form>
+                  <h6 class="heading-small mb-4">User information</h6>
+                  <div class="user_image text-center">
+                    <img class="img-fluid" src="{{user.image_url}}" alt="User Image">
+                  </div>
+                  <div class="pl-lg-4">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="input-username">Username</label>
+                          <input disabled type="text" id="input-username" class="form-control form-control-alternative"
+                            placeholder="Username" value="{{user.username}}">
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-email">Email address</label>
+                          <input disabled value="{{user.email}}" type="email" id="input-email"
+                            class="form-control form-control-alternative" placeholder="jesse@example.com">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="input-first-name">First name</label>
+                          <input disabled value="{{user.first_name}}" type="text" id="input-first-name"
+                            class="form-control form-control-alternative" placeholder="First name" value="Lucky">
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="input-last-name">Last name</label>
+                          <input disabled value="{{user.last_name}}" type="text" id="input-last-name"
+                            class="form-control form-control-alternative" placeholder="Last name" value="Jesse">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="my-4">
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Show favorite recipes section -->
+      <div style="display: none;" id="recipes_section">
+        <div class="container">
+          <div class="row mb-4">
+            {%if not saved_recipes%}
+            <p class="ml-5 display-3 font-weight-bold">No saved recipes to display!</p>
+            {%else%}
+            {%for recipe in saved_recipes%}
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+              <div class="card mb-2" style="height:300px; width: 15rem;">
+                <img src="{{recipe.recipe_image}}" class="card-img-top" alt="Recipe Image">
+                <div class="card-body">
+                  <h5 class="card-title">{{recipe.title}}</h5>
+                  <a href="/search/recipes/{{recipe.recipe_source_id}}" class="btn btn-primary">View Recipe</a>
+                  <form class="d-inline" action="/recipes/delete/{{recipe.recipe_source_id}}" method="POST">
+                    <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+            {%endfor%}
+            {%endif%}
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Show delete account section  -->
+      <div style="display: none;" id="delete_section">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 col-sm-8 m-auto">
+              <div class="text-center" id="delete_account">
+                <div class="text-center icon">
+                  <i class="fas fa-trash-alt"></i>
+                </div>
+                <div class="delete_heading">
+                  <h4 class="font-weight-bold">Delete Account?</h4>
+                </div>
+                <div class="pt-3 px-5 delete_body">
+                  <p class="font-weight-light">Are you sure you want to delete your account?</p>
+                  <p class="text-small">Warning: You'll permanently lose access to search and store recipes!</p>
+                </div>
+                <div class="pt-2 pb-3 delete_footer">
+                  <p class="px-4 font-weight-light">We'd hate to see you go. Drop us a <a href="#">line</a> if you have
+                    any questions!</p>
+
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn_delete" data-toggle="modal" data-target="#delete_modal">Yes,
+                    Delete!</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Are you sure?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Warning! Please only delete your account if you no longer want to use Homestew. If you delete your
+                account
+                now, you will not be able to retrieve recipes. Enter current password to continue:
+                <div class="form-group mt-3 password_modal">
+                  <form method="POST">
+                    {{ delete_form.hidden_tag() }}
+      
+                    {% for field in delete_form if field.widget.input_type != 'hidden' %}
+      
+              
+                      {{ field(placeholder="Current Password",class="mt-0 form-control",id="pass") }}
+                  
+      
+                    {% for error in field.errors %}
+                    <span class="text-danger">{{ error }}</span>
+                    {% endfor %} {% endfor %}
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                      <button href="/users/{{user.id}}/delete" type="submit" id="btn_delete" class="btn btn-danger">Delete Account</button>
+                    </div>
+                    
+                  </form>
+                </div>
+
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+</section>
+{%endblock%}
