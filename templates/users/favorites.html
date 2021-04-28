@@ -7,6 +7,9 @@
 
     <div class="mt-5 container">
         <div class="row">
+            {%if not saved_recipes%}
+            <p class="display-4">There are no saved recipes to display!</p>
+            {%else%}
             {%for recipe in saved_recipes%}
             <div class="col-lg-4 col-md-6">
                 <div class="card" style="width: 18rem;">
@@ -21,6 +24,7 @@
                   </div>
             </div>
             {%endfor%}
+            {%endif%}
         </div>
 </section>
 

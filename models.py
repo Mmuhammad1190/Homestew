@@ -131,12 +131,6 @@ class Recipe(db.Model):
             Recipe.recipe_source_id == recipe_source_id)
         return index
 
-    @classmethod
-    def update_time(cls):
-        """Used to update the datetime on each new message"""
-        time = datetime.now()
-        return time
-
 
 class FavoriteRecipe(db.Model):
     """Recipes saved by user"""

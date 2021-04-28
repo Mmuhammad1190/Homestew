@@ -160,7 +160,8 @@ def search_page():
 def show_recipe(recipe_id):
     """Show individual recipe from search query"""
     if not g.user:
-        flash('Access Unauthorized! Please login to view/save recipes!', "danger")
+        flash('Access Unauthorized! Please login to view/save recipes!',
+              "danger")
         return redirect('/')
 
     params = {"apiKey": API_KEY}
@@ -171,7 +172,8 @@ def show_recipe(recipe_id):
 
     recipe = json.loads(res.content)
     nutrition = json.loads(widget.content)
-    return render_template('/recipes/recipe.html', nutrition=nutrition, recipe=recipe)
+    return render_template('/recipes/recipe.html', nutrition=nutrition,
+                           recipe=recipe)
 
 ##########################################################
 # User Home/Profile/Delete/Favorites Routes
@@ -216,7 +218,8 @@ def show_profile(user_id):
 
             do_logout()
         return redirect("/")
-    return render_template('/users/profile.html', saved_recipes=saved_recipes, user=user, form=form, delete_form=delete_form)
+    return render_template('/users/profile.html', saved_recipes=saved_recipes,
+                           user=user, form=form, delete_form=delete_form)
 
 
 @app.route('/users/<int:user_id>/favorites')
@@ -229,12 +232,13 @@ def show_favorites(user_id):
 
     saved_recipes = User.get_user_fav_recipes(user_id)
     user = User.query.get_or_404(user_id)
-    return render_template('/users/favorites.html', saved_recipes=saved_recipes, user=user)
+    return render_template('/users/favorites.html',
+                           saved_recipes=saved_recipes, user=user)
 ###########################################################
 # Recipes Routes
 
 
-@app.route('/recipes/save/<int:recipe_id>')
+@app.route('/recipes/save/<int:recipe_id>', methods=['GET', 'POST'])
 def save_recipe(recipe_id):
     """Save individual recipe"""
 
@@ -244,7 +248,8 @@ def save_recipe(recipe_id):
     recipe = json.loads(res.content)
 
     Recipe.save(recipe['title'], recipe['spoonacularSourceUrl'], recipe['id'],
-                recipe['image'], recipe['aggregateLikes'], recipe['spoonacularScore'],
+                recipe['image'], recipe['aggregateLikes'],
+                recipe['spoonacularScore'],
                 recipe['summary'])
     db.session.commit()
 
@@ -256,7 +261,7 @@ def save_recipe(recipe_id):
     return redirect('/')
 
 
-@app.route('/recipes/delete/<int:recipe_id>', methods=['POST'])
+@app.route('/recipes/delete/<int:recipe_id>', methods=['GET', 'POST'])
 def remove_recipe(recipe_id):
     """Remove individual recipe from saved recipes"""
 
@@ -297,7 +302,8 @@ def browse_types(recipe_type):
     res = requests.get(f"{BASE_URL}/random", params)
     recipes = json.loads(res.content)
     recipe_type = recipe_type.title()
-    return render_template('/recipes/browse.html', recipes=recipes, recipe_type=recipe_type)
+    return render_template('/recipes/browse.html', recipes=recipes,
+                           recipe_type=recipe_type)
 
 
 @app.route('/recipes/diets')
