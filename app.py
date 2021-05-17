@@ -4,7 +4,7 @@ import json
 from flask import Flask, render_template, flash, redirect, session, g
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
-from secrets import SECRET, os, API_KEY
+from secrets import os, API_KEY
 
 
 from models import db, connect_db, User, Recipe, FavoriteRecipe
