@@ -13,14 +13,15 @@
     href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;700&family=Josefin+Sans:wght@300;400;700&display=swap"
     rel="stylesheet" />
   <script src="https://kit.fontawesome.com/5473a8d150.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/sass/styles.css" />
   <title>{%block title%}Homestew{%endblock%}</title>
 </head>
 
 <body style="font-family: 'Josefin Sans', sans-serif">
   <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
     <!--  Show this only on mobile to medium screens  -->
-    <a class="navbar-brand d-lg-none mx-auto" href="#">H</a>
+    <a class="navbar-brand d-lg-none pl-5 mx-auto" href="/"><img class="homestew_bowl"
+        src="/static/images/homestew_bowl.svg" alt="Homestew alternate image"></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
       aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,85 +33,123 @@
         {%if g.user%}
 
         <li class="nav-item">
-          <a class="nav-link" href="/logout">Logout <i class="fas fa-sign-out-alt"></i><a>
+          <a class="px-2 text-center nav-link" href="/logout">Logout <i class="fas fa-sign-out-alt"></i><a>
         </li>
 
         {%else%}
         <li class="nav-item">
-          <a class="nav-link" href="/login">Login <i class="fas fa-user"></i> <a>
+          <a class="px-2 text-center nav-link" href="/login">Login <i class="fas fa-user"></i> <a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/signup">Sign-Up <i class="fas fa-sign-in-alt"></i> <a>
+          <a class="px-2 text-center nav-link" href="/signup">Sign-Up <i class="fas fa-sign-in-alt"></i> <a>
         </li>
         {%endif%}
 
         {%if g.user%}
         <li class="nav-item">
 
-          <a class="nav-link" href="/recipes/browse">Browse Recipes <i class="fas fa-book-open"></i></a>
+          <a class="px-2 text-center nav-link" href="/recipes/browse">Browse Recipes <i class="fas fa-book-open"></i></a>
         </li>
 
 
 
 
         <li class="nav-item">
-          <a class="nav-link" href="/recipes/diets">Diets <i class="fas fa-utensils"></i></a>
+          <a class="px-2 text-center nav-link" href="/recipes/diets">Diets <i class="fas fa-utensils"></i></a>
         </li>
         {%endif%}
       </ul>
 
       <!--   Show this only lg screens and up   -->
+      {%if g.user%}
       <a class="navbar-brand mx-auto pt-0 d-none d-lg-block" href="/">
-        {%if not g.user%}
-        <img style="padding-right: 111px;" src="/static/images/homestew_alt_img.svg" id="homestew_alt_img"
-          alt="Homestew Alt Image" />
-        {%else%}
-        <img style="padding-right: 69px" src="/static/images/homestew_alt_img.svg" id="homestew_alt_img"
-          alt="Homestew Alt Image" />
-        {%endif%}
+        <img class="text-center" src="/static/images/homestew_alt_img.svg" id="homestew_alt_img"
+          alt="Homestew Alt Image"/>
       </a>
+      {%else%}
+      <a class="navbar-brand mx-auto pt-0 d-none d-lg-block" href="/">
+        <img style="padding-right: 151px" class="text-center" src="/static/images/homestew_alt_img.svg" id="homestew_alt_img"
+          alt="Homestew Alt Image"/>
+      </a>
+      {%endif%}
+
 
       <ul class="navbar-nav">
         {%if g.user%}
         <li class="nav-item">
-          <a class="nav-link" href="/users/{{ g.user.id }}">Profile <i class="fas fa-user"></i></a>
+          <a class="px-2 text-center nav-link" href="/users/{{ g.user.id }}">Profile <i class="fas fa-user"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/users/{{g.user.id}}/favorites">Favorites <i class="fas fa-bookmark"></i></a>
+          <a class="px-2 text-center nav-link" href="/users/{{g.user.id}}/favorites">Favorites <i class="fas fa-bookmark"></i></a>
         </li>
         {%endif%}
         <li class="nav-item">
-          <a class="nav-link active" href="/search">Search <i class="fas fa-search"></i></a>
+          <a class="px-2 text-center nav-link active" href="/search">Search <i class="fas fa-search"></i></a>
         </li>
       </ul>
     </div>
   </nav>
+
+  {% with messages = get_flashed_messages(with_categories=True) %}
+  {% if messages %}
   <div class="container">
-    {% with messages = get_flashed_messages(with_categories=True) %}
-
-    {% if messages %}
-
     {% for category, message in messages %}
-
     <div class="alert alert-{{ category }} alert-dismissable" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="close">
         <span aria-hidden="true">X</span>
       </button>
-
       <p>{{message}}</p>
     </div>
     {% endfor  %}
-    {% endif %}
-    {% endwith %}
-
   </div>
+  {% endif %}
+  {% endwith %}
+
+
 
   {%block content%} {%endblock%}
 
+  {%if g.user%}
+  <footer>
+    <div class="row pt-3 mr-0">
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="text-center">
+          <img class="mb-3" style="height:50px" src="/static/images/homestew_alt_img.svg" alt="homestew image">
+          <p class="h5">© 2021, Homestew. All rights reserved.</p>
+        </div>
+      </div>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-  </script>
+      <div class="px-0 col-sm-12 col-md-6 col-lg-4">
+        <div class="additional_menu">
+          <p class="h4">Additional Menu</p>
+          <ul class="d-inline-block">
+            <li><a href="/">Home</a></li>
+            <li><a href="/recipes/browse">Browse Recipes</a></li>
+            <li><a href="/recipes/diets">Diets</a></li>
+            <li><a href="/search">Search</a></li>
+          </ul>
+          <ul class="d-inline-block">
+            <li><a href="/users/{{g.user.id}}">My Account</a></li>
+            <li><a href="/users/{{g.user.id}}/favorites">Favorites</a></li>
+            <li><a href="#">Support</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="d-none  d-lg-inline-block d-xl-inline-block col-lg-4">
+        <p class="h4">Get a Newsletter</p>
+        <p class="h5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam voluptatum similique deserunt
+          alias ut amet.</p>
+        <input type="text" class=text_field placeholder="E-mail">
+        <button class="mt-2">Subscribe</button>
+      </div>
+    </div>
+  </footer>
+  {%endif%}
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
   </script>
@@ -120,6 +159,7 @@
   <script src="/static/js/search.js"></script>
   <script src="/static/js/profile.js"></script>
   <script src="/static/js/recipe.js"></script>
+  <script src="/static/js/home.js"></script>
 </body>
 
 </html>

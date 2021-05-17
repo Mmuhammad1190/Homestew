@@ -1,6 +1,6 @@
 """Homestew forms"""
 
-from parameters import CUISINES, DIETS, EXCLUDED_CUISINES, INTOLERANCES, SORT, TYPES
+from parameters import COOKING_STATUS, CUISINES, DIETS, EXCLUDED_CUISINES, INTOLERANCES, SORT, TYPES
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SelectField, IntegerField
 from wtforms.validators import DataRequired, Email, Length
@@ -15,6 +15,10 @@ class UserAddForm(FlaskForm):
     email = EmailField(
         'E-mail', validators=[DataRequired(), Email()])
     image_url = URLField('(Optional) Image URL')
+    cooking_status = SelectField(
+        'What is your cooking status?', choices=COOKING_STATUS)
+    location = StringField('Where is your kitchen located?',
+                           validators=[Length(max=25)])
     password = PasswordField('Password', validators=[
                              DataRequired(), Length(min=6)])
 

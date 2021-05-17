@@ -19,6 +19,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = (
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+app.config['DEBUG_TB_ENABLED'] = False
 app.config['SECRET_KEY'] = SECRET
 app.config['WTF_CSRF_ENABLED'] = False
 debug = DebugToolbarExtension(app)
@@ -78,6 +79,8 @@ def signup():
                 password=form.password.data,
                 email=form.email.data,
                 image_url=form.image_url.data or User.image_url.default.arg,
+                cooking_status=form.cooking_status.data,
+                location=form.location.data
             )
             db.session.commit()
 
@@ -129,11 +132,15 @@ def logout():
 def search_page():
     """Search and return for recipes using form queries
 
-    If 'GET' returns search form and random recipes
+    If 'GET' returns search form 
 
     If 'POST' returns api request data as JSON
     *certain key names are changed to match the parameters in API*
     """
+
+    if not g.user:
+        flash('Please login to search recipes', "danger")
+        return redirect('/')
 
     form = SelectForm()
 
@@ -169,11 +176,14 @@ def show_recipe(recipe_id):
     res = requests.get(f"{BASE_URL}/{recipe_id}/information", params)
     widget = requests.get(
         f"{BASE_URL}/{recipe_id}/nutritionWidget.json", params)
+    random = requests.get(f"{BASE_URL}/random",
+                          {"apiKey": API_KEY, "number": 5})
 
     recipe = json.loads(res.content)
     nutrition = json.loads(widget.content)
+    random = json.loads(random.content)
     return render_template('/recipes/recipe.html', nutrition=nutrition,
-                           recipe=recipe)
+                           recipe=recipe, random=random)
 
 ##########################################################
 # User Home/Profile/Delete/Favorites Routes
@@ -187,7 +197,6 @@ def home():
         return render_template('home.html')
     else:
         return render_template('home_anon.html')
-    return render_template('home_anon.html')
 
 
 @app.route('/users/<int:user_id>', methods=['GET', 'POST'])
@@ -242,6 +251,10 @@ def show_favorites(user_id):
 def save_recipe(recipe_id):
     """Save individual recipe"""
 
+    if not g.user:
+        flash('Please login to save/remove recipes', "danger")
+        return redirect('/')
+
     params = {"apiKey": API_KEY}
 
     res = requests.get(f"{BASE_URL}/{recipe_id}/information", params)
@@ -258,17 +271,20 @@ def save_recipe(recipe_id):
     FavoriteRecipe.update_fav(g.user.id, saved_recipe_index)
 
     db.session.commit()
-    return redirect('/')
+    return redirect(f'/users/{g.user.id}/favorites')
 
 
 @app.route('/recipes/delete/<int:recipe_id>', methods=['GET', 'POST'])
 def remove_recipe(recipe_id):
     """Remove individual recipe from saved recipes"""
+    if not g.user:
+        flash('Please login to save/remove recipes', "danger")
+        return redirect('/')
 
     Recipe.delete_recipe(recipe_id)
     db.session.commit()
     flash('Your recipe was removed!', category='success')
-    return redirect(f'/users/{g.user.id}')
+    return redirect(f'/users/{g.user.id}/favorites')
 
 
 @app.route('/recipes/browse')
@@ -309,6 +325,9 @@ def browse_types(recipe_type):
 @app.route('/recipes/diets')
 def show_diets():
     """Show recipe categories/diets"""
+    if not g.user:
+        flash('Please login to view diets', "danger")
+        return redirect('/')
 
     return render_template("recipes/diets.html")
 

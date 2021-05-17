@@ -4,30 +4,42 @@
 <section id="recipe">
     <div class="container">
         <div class="pt-5" id="recipe_header">
-            <h1>{{recipe.title}}</h1>
-            <div id="recipe_img">
-                <img class="img-fluid" src="{{recipe.image}}" alt="">
-                <div class="recipe_details">
-                    <a href="/recipes/save/{{recipe.id}}" id="{{recipe.id}}"
-                        class="recipe_save btn btn-primary mt-3">save</a>
-                </div>
+            <div class="h5" style="position: relative;">
+                <span><i class="mr-3 fas fa-chart-line"></i> {{recipe.spoonacularScore}}% would make this again</span>
+                <span><a href="/recipes/save/{{recipe.id}}" id="{{recipe.id}}" class="recipe_save"><i
+                            class="far fa-bookmark"></i></a></span>
+            </div>
+
+            <h1 class="mb-3 cursive display-2">{{recipe.title}}</h1>
+            <div style="background-image: url('{{recipe.image}}')" id="recipe_img">
+            </div>
+            <div class="recipe_misc">
+                <ul>
+                    <li><small>Prep Time </small><span>{{recipe.readyInMinutes}}</span></li>
+                    <li><small>Servings</small><span>{{recipe.servings}} PEOPLE</span></li>
+                    <li><small>Print</small><span><a onClick="window.print()"><i
+                                    style="color: #39393B; font-size: 1.5rem; cursor: pointer;"
+                                    class="ml-2 mt-2 fas fa-print"></i>
+                            </a></span></li>
+                </ul>
             </div>
             <hr>
 
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-lg-8">
                     <p class="recipe_summary">{{recipe.summary}}</p>
                 </div>
-                <div class="col-lg-4">
+                <div class="ml-5 col-lg-3 col-md-6">
                     <div class="nutrition_card">
-                        <h3>Nutrition Facts </h3>
+                        <h3 class="text-center">Nutrition Facts </h3>
                         <table style="width:100%">
-                            {%for k,v in nutrition.items() if k != "isStale" and k != "expires" and k != "bad" and k !=
-                            "good"%}
+                            {%for k,v in nutrition.items() %}
+                            {%if loop.index <= 4 %}
                             <tr>
-                                <td>{{k}}</td>
-                                <td>{{v}}</td>
+                                <td class="font-weight-light">{{k}}</td>
+                                <td class="font-weight-bold">{{v}}</td>
                             </tr>
+                            {%endif%}
                             {%endfor%}
                         </table>
                     </div>
@@ -41,23 +53,51 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="ingredients">
-                        <h2>Ingredients</h2>
+                        <h2 class="display-4">Ingredients</h2>
                         <ul>
                             {%for item in recipe.extendedIngredients%}
                             <li class="mb-2"><i class="d-inline-block mr-3 fas fa-check"></i>{{item.original}}</li>
                             {%endfor%}
                         </ul>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="instructions">
-                        <h2>Instructions</h2>
+                    <div class="mt-5 instructions">
+                        <h2 class="display-4">Instructions</h2>
                         <ol>
                             {%for list in recipe.analyzedInstructions[0].steps%}
                             <li class="mb-3">{{list.step}}</li>
                             {%endfor%}
                         </ol>
                     </div>
+                </div>
+
+
+                <div class="ml-5 col-lg-5">
+                    <div class="random_recipes">
+                        <p class="h2 mb-2">Fresh Recipes</p>
+                        {%for random_r in random.recipes%}
+
+                        <div class="row mb-4">
+                            <div class="col-lg-4">
+                                <div>
+                                    <a href="/search/recipes/{{random_r.id}}">
+                                        <img style="border-radius: 10px" class="img-fluid" src="{{random_r.image}}"
+                                            alt="{{random_r.title}}">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-7">
+                                <div>
+                                    <span
+                                        style='font-size:40px;color: #F5B43C;'>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                                    <p class="h5">{{random_r.title}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {%endfor%}
+                    </div>
+
                 </div>
             </div>
         </div>

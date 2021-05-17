@@ -9,7 +9,7 @@
         <div class="container-xl">
             <div class="row">
                 <div class="col-lg-12  mx-auto">
-                    <h2 class="browse_heading"><span>Choose A Type</span></h2>
+                    <h2 class="secondary_headings"><span>Choose A Type</span></h2>
                     <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
                         <!-- Carousel indicators -->
                         <ol class="carousel-indicators">
@@ -22,22 +22,22 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3">
                                         <div class="img-box">
                                             <a href="/recipes/browse/main_course">MAIN COURSE</a>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3">
                                         <div class="img-box">
                                             <a href="/recipes/browse/side_dish">SIDE DISH</a>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3">
                                         <div class="img-box">
                                             <a href="/recipes/browse/dessert">DESSERT</a>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3">
                                         <div class="img-box">
                                             <a href='/recipes/browse/appetizer'>APPETIZER</a>
                                         </div>
@@ -46,22 +46,22 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3">
                                         <div class="img-box">
                                             <a href='/recipes/browse/salad'>SALAD</a>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3">
                                         <div class="img-box">
                                             <a href='/recipes/browse/bread'>BREAD</a>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3">
                                         <div class="img-box">
                                             <a href='/recipes/browse/breakfast'>BREAKFAST</a>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3">
                                         <div class="img-box">
                                             <a href='/recipes/browse/soup'>SOUP</a>
                                         </div>
@@ -70,22 +70,22 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3">
                                         <div class="img-box">
                                             <a href='/recipes/browse/beverage'>BEVERAGE</a>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3">
                                         <div class="img-box">
                                             <a href='/recipes/browse/sauce'>SAUCE</a>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3">
                                         <div class="img-box">
                                             <a href='/recipes/browse/marinade'>MARINADE</a>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3">
                                         <div class="img-box">
                                             <a href="">FINGERFOOD</a>
                                         </div>
@@ -94,12 +94,12 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3">
                                         <div class="img-box">
                                             <a href='/recipes/browse/snack'>SNACK</a>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3">
                                         <div class="img-box">
                                             <a href='/recipes/browse/drink'>DRINK</a>
                                         </div>
@@ -126,18 +126,25 @@
             <div class="row">
                 {%for recipe in recipes.recipes%}
                 {%if recipe.image%}
-                <div class="col-lg-5">
-                    <div class="recipe_box">
+                <div class="col-md-6">
+                    <div class="recipe_box mt-2 mb-5">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="recipe_img col-md-6">
                                 <a href="/search/recipes/{{recipe.id}}"><img class="img-fluid" src="{{recipe.image}}"
                                         alt=""></a>
                             </div>
-                            <div class="col-lg-6">
-                                <ul>
-                                    <li>{{recipe.title}}</li>
-                                    <li><i class="far fa-clock"></i> {{recipe.readyInMinutes}} minutes</li>
-                                    <li>Recipe By: John Doe</li>
+                            <div class="recipe_info col-md-6">
+                                <ul class="pl-0">
+                                    <li class="small_title h4 mb-0">{{recipe.title}}</li>
+                                    <div class="mb-0 star_ratings">
+                                        <div class="mb-0 fill_ratings" style="width:{{recipe.spoonacularScore}}%">
+                                            <span>★★★★★</span>
+                                        </div>
+                                    </div>
+                                    <li class="minutes mb-1"><i class="far fa-clock"></i> <span class="cursive">{{recipe.readyInMinutes}} minutes</span></li>
+                                    <li>
+                                        <p>Recipe By: {{recipe.sourceName}}</p>
+                                    </li>
                                 </ul>
 
                             </div>

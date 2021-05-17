@@ -92,15 +92,22 @@ const generateCardHTML = function (recipes) {
   for (let i in recipes) {
     let card = `<div class="col-lg-3 col-md-4 col-sm-6">
              <div style=" background: linear-gradient(#39393b80,#39393b80), url(${recipes[i].image}) center center/cover no-repeat;"
-             id="${recipes[i].id}" class="recipe_card">
-                 <div class="text-center mt-4">
-                     <h5 class=" recipe_card_title">${recipes[i].title}</h5>
-                     <div class="mt-4 overlay_button"><a href="/search/recipes/${recipes[i].id}">VIEW RECIPE</a></div>
+             class="mx-auto recipe_card">
+             <div class="like_recipe"><a href="/recipes/save/${recipes[i].id}"><i class="fas fa-heart"></i></a></div>
+             <div class="overlay"></div>
+                 <div class="text-center">
+                     <h5 class="recipe_card_title">${recipes[i].title}</h5>
+                 </div>
+                 <div class="text-center">
+                 <a href="/search/recipes/${recipes[i].id}" class="recipe_btn">VIEW</a>
                  </div>
              </div>
+             
+             
          </div>`
 
     $('.result_row').append(card)
   }
 
 }
+

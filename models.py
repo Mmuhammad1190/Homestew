@@ -28,6 +28,8 @@ class User(db.Model):
     username = db.Column(db.Text, nullable=False, unique=True)
     image_url = db.Column(db.Text, default="/static/images/default-pic.png")
     password = db.Column(db.Text, nullable=False)
+    cooking_status = db.Column(db.Text, nullable=False)
+    location = db.Column(db.String, default="Home Kitchen, USA")
     favorite_recipes = db.relationship(
         'Recipe', backref='user', secondary='fav_recipes')
 
@@ -42,17 +44,20 @@ class User(db.Model):
         curr_user.username = form.username.data
         curr_user.email = form.email.data
         curr_user.image_url = form.image_url.data or User.image_url.default.arg
+        curr_user.location = form.location.data or User.location.default.arg
+        curr_user.cooking_status = form.cooking_status.data
         db.session.add(curr_user)
         return curr_user
 
     @classmethod
     def signup(cls, first_name, last_name, username, email, password,
-               image_url):
+               image_url, cooking_status, location):
         """Sign up user; Hashes password and adds user to system."""
         hashed_pwd = bcrypt.generate_password_hash(password).decode('UTF-8')
         user = User(first_name=first_name, last_name=last_name,
                     username=username, email=email,
-                    password=hashed_pwd, image_url=image_url)
+                    password=hashed_pwd, image_url=image_url,
+                    cooking_status=cooking_status, location=location)
         db.session.add(user)
         return user
 

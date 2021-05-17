@@ -57,3 +57,6 @@ TYPES = [(None, '-- Choose a meal type --'), ("main course", 'main course'), ("s
 
 SORT = [(None, '-- Sort by --'), ("popularity", 'popularity'), ("healthiness", 'healthiness'),
         ("time", 'time'), ("calories", 'calories'), ("random", 'random')]
+
+COOKING_STATUS = [("Beginner", 'Beginner'), ("Intermediate",
+                                             'Intermediate'), ("Expert", 'Expert'), ("Chef", 'Chef')]
