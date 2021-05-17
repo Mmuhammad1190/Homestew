@@ -4,7 +4,8 @@ import json
 from flask import Flask, render_template, flash, redirect, session, g
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
-from secrets import os, API_KEY
+from secrets import API_KEY
+import os
 
 
 from models import db, connect_db, User, Recipe, FavoriteRecipe
@@ -20,7 +21,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['DEBUG_TB_ENABLED'] = False
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "its_a_secret")
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['WTF_CSRF_ENABLED'] = False
 debug = DebugToolbarExtension(app)
 
