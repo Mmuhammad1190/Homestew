@@ -4,7 +4,6 @@ import json
 from flask import Flask, render_template, flash, redirect, session, g
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
-from secrets import API_KEY
 import os
 
 
@@ -29,6 +28,7 @@ connect_db(app)
 
 CURR_USER_KEY = "curr_user"
 BASE_URL = 'https://api.spoonacular.com/recipes'
+API_KEY = os.environ.get('SPOONACULAR_API_KEY')
 
 ######################################################################
 # User signup/login/logout
