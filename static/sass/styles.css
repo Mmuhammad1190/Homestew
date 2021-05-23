@@ -1228,7 +1228,7 @@ option {
 
   header {
     background: linear-gradient(#39393b56, #39393b56), url("/static/images/Sizzling - 11632_Moment.jpg") center center/cover no-repeat fixed;
-    height: 100vh;
+    height: 90vh;
     max-width: 100%;
     min-height: 25rem;
   }
@@ -1236,7 +1236,7 @@ option {
     display: none;
   }
   header .overlay {
-    height: 110.7%;
+    height: 100%;
   }
   header .container {
     max-width: 730px;
@@ -1476,14 +1476,44 @@ option {
   }
 }
 @media only screen and (max-width: 505px) {
-  header .container {
-    padding-left: 1.5rem;
-  }
   header h1 {
     font-size: 2rem;
   }
 }
 @media only screen and (max-width: 500px) {
+  header .mobile_header {
+    background-color: #FCF8F5;
+  }
+  header .overlay {
+    height: 101.9% !important;
+  }
+  header .container {
+    text-align: center !important;
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+  }
+  header .container .s_container {
+    padding-left: 0 !important;
+    padding-top: 100px !important;
+  }
+  header .container a {
+    display: block;
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+  header .container h1, header .container p {
+    display: none;
+    opacity: 0;
+  }
+  header .container img {
+    display: block !important;
+    height: 110px;
+    margin: auto;
+    max-width: 80%;
+  }
+
   .login {
     padding: 30px 40px;
   }

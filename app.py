@@ -139,10 +139,6 @@ def search_page():
     *certain key names are changed to match the parameters in API*
     """
 
-    if not g.user:
-        flash('Please login to search recipes', "danger")
-        return redirect('/')
-
     form = SelectForm()
 
     params = {"apiKey": API_KEY, "number": 100}

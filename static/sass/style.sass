@@ -1085,14 +1085,14 @@ option
             margin-right: 131px
 
     header
-        background: linear-gradient(#39393b56, #39393b56), url("/static/images/Sizzling - 11632_Moment.jpg") center center/cover no-repeat fixed
-        height: 100vh
+        background: linear-gradient(#39393b56, #39393b56), url("/static/images/Sizzling - 11632_Moment.jpg") center center/cover no-repeat fixed 
+        height: 90vh
         max-width: 100%
         min-height: 25rem
         video
             display: none
         .overlay
-            height: 110.7%
+            height: 100%
         .container
             max-width: 730px
             p
@@ -1274,12 +1274,37 @@ option
 
 @media only screen and (max-width: 505px)
     header
-        .container
-            padding-left: 1.5rem
         h1
             font-size: 2rem
 
 @media only screen and (max-width: 500px)
+    header 
+        .mobile_header
+            background-color: $athens_gray
+        .overlay
+            height: 101.9%!important
+        .container
+            text-align: center!important
+            padding-left: 3rem!important
+            padding-right: 3rem!important
+            .s_container
+                padding-left: 0!important
+                padding-top: 100px!important
+            a
+                display: block
+                width: 50% 
+                text-align: center
+                margin: auto
+                margin-bottom: 10px
+            h1, p
+                display: none
+                opacity: 0
+            img
+                display: block!important
+                height: 110px
+                margin: auto
+                max-width: 80%
+                
     .login
         padding: 30px 40px
     #login
