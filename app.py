@@ -1,6 +1,7 @@
 """Homestew Recipe App"""
 import requests
 import json
+from dotenv import load_dotenv
 from flask import Flask, render_template, flash, redirect, session, g
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
@@ -10,8 +11,10 @@ import os
 from models import db, connect_db, User, Recipe, FavoriteRecipe
 from forms import SelectForm, UserAddForm, LoginForm, DeleteAccountForm
 
-
+load_dotenv()
 app = Flask(__name__)
+SECRET = os.getenv('SECRET')
+
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (
     os.environ.get('DATABASE_URL', 'postgres:///homestew'))
@@ -20,7 +23,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['DEBUG_TB_ENABLED'] = False
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "its_a_secret")
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', SECRET)
 app.config['WTF_CSRF_ENABLED'] = False
 debug = DebugToolbarExtension(app)
 
@@ -28,7 +31,7 @@ connect_db(app)
 
 CURR_USER_KEY = "curr_user"
 BASE_URL = 'https://api.spoonacular.com/recipes'
-API_KEY = os.environ.get('SPOONACULAR_API_KEY')
+API_KEY = os.getenv('API_KEY')
 
 ######################################################################
 # User signup/login/logout
@@ -133,7 +136,7 @@ def logout():
 def search_page():
     """Search and return for recipes using form queries
 
-    If 'GET' returns search form 
+    If 'GET' returns search form
 
     If 'POST' returns api request data as JSON
     *certain key names are changed to match the parameters in API*
@@ -292,7 +295,7 @@ def show_types():
         flash('Please login to browse recipes', "danger")
         return redirect('/')
 
-    params = {"apiKey": API_KEY, "number": 10}
+    params = {"apiKey": API_KEY, "number": 8}
 
     res = requests.get(f"{BASE_URL}/random", params)
     recipes = json.loads(res.content)

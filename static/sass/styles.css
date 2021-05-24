@@ -899,7 +899,7 @@ option {
   text-decoration: none;
   text-align: center;
   text-transform: uppercase;
-  transition: background 0.25s ease-in-out;
+  transition: background 0.15s ease-in-out;
   letter-spacing: 1px;
   opacity: 0;
   position: absolute;
