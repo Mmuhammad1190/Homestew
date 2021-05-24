@@ -31,7 +31,7 @@ connect_db(app)
 
 CURR_USER_KEY = "curr_user"
 BASE_URL = 'https://api.spoonacular.com/recipes'
-API_KEY = os.getenv('API_KEY')
+API_KEY = os.environ.get('API_KEY', os.getenv('API_KEY'))
 
 ######################################################################
 # User signup/login/logout
